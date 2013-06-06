@@ -14,7 +14,7 @@ class Heroine
 
 	/**
 	 * For the lazy only
-	 * 
+	 *
 	 * @param  string $alias
 	 * @return Heroine
 	 */
@@ -52,7 +52,7 @@ class Heroine
 	 *  - Factories
 	 *
 	 * Initializers are run on all objects, regardless of where they are loaded
-	 * 
+	 *
 	 * @param  string $service service name
 	 * @return object
 	 */
@@ -86,6 +86,9 @@ class Heroine
 
 		if ( ! $object)
 			throw new Exception\ServiceNotFoundException;
+
+		if ($object instanceof HeroineAwareInterface)
+			$object->setHeroine($this);
 
 		$initializers = $this->_config->getInitializers();
 		foreach ($initializers as $callable)
