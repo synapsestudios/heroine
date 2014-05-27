@@ -7,7 +7,7 @@
          coverageHtml="./shippable/codecoverage"
          strict="true"
          verbose="true"
-         bootstrap="tests/bootstrap.php">
+         bootstrap="test/bootstrap.php">
 	<testsuites>
 		<testsuite name="Heroine">
 			<file>test/HeroineTest/ConfigTest.php</file>
