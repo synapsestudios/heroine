@@ -1,0 +1,18 @@
+<phpunit colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="false"
+         syntaxCheck="false"
+         coverageHtml="./shippable/codecoverage"
+         strict="true"
+         verbose="true"
+         bootstrap="tests/bootstrap.php">
+	<testsuites>
+		<testsuite name="Heroine">
+			<file>test/HeroineTest/ConfigTest.php</file>
+			<file>test/HeroineTest/HeroineTest.php</file>
+			<file>test/HeroineTest/ServiceOverrideConfigTest.php</file>
+		</testsuite>
+	</testsuites>
+</phpunit>
