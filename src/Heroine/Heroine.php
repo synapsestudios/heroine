@@ -69,6 +69,9 @@ class Heroine
 
 		switch ($serviceConfig['type'])
 		{
+			case Config::TYPE_MOCK:
+				$object = $factory;
+				break;
 			case Config::TYPE_INSTANTIABLE:
 				$object = new $factory;
 				break;

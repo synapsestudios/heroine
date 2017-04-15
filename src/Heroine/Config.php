@@ -11,12 +11,14 @@ class Config
 	const TYPE_INSTANTIABLE = 1;
 	const TYPE_CALLABLE     = 2;
 	const TYPE_FACTORY      = 3;
+	const TYPE_MOCK         = 4;
 
 	protected $_aliases       = array();
 	protected $_instantiables = array();
 	protected $_callables     = array();
 	protected $_factories     = array();
 	protected $_initializers  = array();
+	protected $_mocks         = array();
 
 	public function __construct($config = array())
 	{
@@ -120,6 +122,16 @@ class Config
 		$this->_factories[$alias] = $service;
 	}
 
+	public function addMock($alias, $mock)
+	{
+		$this->_mocks[$alias] = $mock;
+	}
+
+	public function removeMock($alias)
+	{
+		unset($this->_mocks[$alias]);
+	}
+
 	public function addInitializer($initializer)
 	{
 		if ( ! is_callable($initializer))
@@ -165,6 +177,13 @@ class Config
 
 	public function resolveService($service)
 	{
+		if (isset($this->_mocks[$service]))
+		{
+			return array(
+				'type' => self::TYPE_MOCK,
+				'factory' => $this->_mocks[$service]
+			);
+		}
 		if (isset($this->_instantiables[$service]))
 		{
 			return array(
@@ -172,7 +191,6 @@ class Config
 				'factory' => $this->_instantiables[$service],
 			);
 		}
-
 		if (isset($this->_callables[$service]))
 		{
 			return array(
